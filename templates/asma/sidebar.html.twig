@@ -1,0 +1,9 @@
+<ul class="nav flex-column">
+{% for item in listjobs  %}
+  
+  <li class="nav-item">
+    <a class="nav-link" href="{{item.id}}">{{item.nomjob}}</a>
+  </li>
+  
+   {% endfor %}
+</ul>
