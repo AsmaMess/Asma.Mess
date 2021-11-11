@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Job;
 
 class AsmaController extends AbstractController
 {
@@ -34,6 +35,7 @@ class AsmaController extends AbstractController
 public function voir(): Response
 {
     
+    
     return $this->render('asma/voir.html.twig');
 }
 public function menu(): Response
@@ -62,9 +64,35 @@ return $this->render('asma/sidebar.html.twig',[
 ]);  
 }
 
+/**  
+ * @Route("/ajouter",name="ajouter")
+  
+ */
+
+public function ajouter()
+{
+$job=new Job();
+$job->setTitle('Developpeur symfony');
+$job->setCompany('Sloth-Lab');
+$job->setDescription('Nous cherchons un developpeur symfony expert');
+$job->setIsactivated('1');
+$job->setExpiresat(new \DateTimeImmutable());
+$job->setEmail('messaoudiasma2019@gmail.com');
+$job->setTelephone('50427272');
+
+// var_dump($job);
+$em=$this->getDoctrine()->getManager();
+$this->getDoctrine()->getManager()->persist($job);
+// var_dump($em);
+
+$em->flush();
+
+return $this-> render('asma/ajouter.html.twig');
 
 
 
+
+}
 
 
 
